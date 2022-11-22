@@ -1,7 +1,6 @@
 /**
  * @WHAT_HAPPEN_BELOW
  * The complexity still O(m*n) :< I can't find out a way reduce
- * But in the most case, execute time reduce about 15 times 
  * What is the idea?
  *  - Sort ages Array
  *  - Transfer ages array to age JSON object with key is age value and the value is how many times this age exist in array
@@ -26,6 +25,7 @@ function rangeCount(ages, ranges) {
   const x = [];
   for (const range of ranges) {
     let a = 0;
+    //O(m*n) here. In the really really bad case, m*n = 10_000_000 * 1000
     for (let i = range[0]; i <= range[1]; i++) {
       a = a + (agesObject[i]>>>0);
     }
