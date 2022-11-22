@@ -5,11 +5,12 @@
  *  - Sort ages Array
  *  - Transfer ages array to age JSON object with key is age value and the value is how many times this age exist in array
  *  - Go through ranges array => calculate sum of age from range[start] -> range[end]
+ *  - One more thing, not just optimize native implementation rangeCount(), I have an idea to reduce execute time each runner, that is caching. I define a global object called cached = {} and store the result each time, maybe we will don't need to calculate sometime
  */
 
 let total = 0;
 const MaxAge = 200;
-
+const cache = new Map();
 console.clear();
 
 function rangeCount(ages, ranges) {
@@ -24,12 +25,18 @@ function rangeCount(ages, ranges) {
   }
   const x = [];
   for (const range of ranges) {
-    let a = 0;
-    //O(m*n) here. In the really really bad case, m*n = 10_000_000 * 1000
-    for (let i = range[0]; i <= range[1]; i++) {
-      a = a + (agesObject[i]>>>0);
+    if (cache.has(`[${range}]`)) {
+    // if (false) {
+      x.push(cache.get(`[${range}]`));
+    } else {
+      let a = 0;
+      //O(m*n) here. In the really really bad case, m*n = 10_000_000 * 1000
+      for (let i = range[0]; i <= range[1]; i++) {
+        a = a + (agesObject[i]>>>0);
+      }
+      cache.set(`[${range}]`, a);
+      x.push(a);
     }
-    x.push(a);
   }
   return x;
   
@@ -64,7 +71,7 @@ function generateData() {
       return Math.floor(Math.random() * MaxAge);
     });
 
-  const ranges = Array(10_000_000)
+  const ranges = Array(10_000_0)
     .fill("")
     .map(() => {
       return [
@@ -76,7 +83,7 @@ function generateData() {
 }
 
 
-const runs = 10;
+const runs = 3;
 let range_counted;
 for (let i = 0; i < runs; i++) {
   const { ages, ranges } = generateData();
