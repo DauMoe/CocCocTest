@@ -1,3 +1,13 @@
+/**
+ * @WHAT_THE_HECK_HAPPEN_BELOW
+ * The complexity still O(m*n) :< I can't find out a way reduce to O(n)
+ * But in the most case, execute time reduce 15 times 
+ * What is the idea?
+ *  - Sort ages Array
+ *  - Transfer ages array to age JSON object with key is age value and the value is how many times this age exist in array
+ *  - Go through ranges array => calculate sum of age from range[start] -> range[end]
+ */
+
 let total = 0;
 const MaxAge = 200;
 
@@ -17,7 +27,7 @@ function rangeCount(ages, ranges) {
   for (const range of ranges) {
     let a = 0;
     for (let i = range[0]; i <= range[1]; i++) {
-      a = a + (range[i]>>>0);
+      a = a + (agesObject[i]>>>0);
     }
     x.push(a);
   }
@@ -46,14 +56,14 @@ function generateData() {
   };
 }
 */
-//10_000_000
+//Max: 10_000_000
   const ages = Array(1000)
     .fill("")
     .map(() => {
       return Math.floor(Math.random() * MaxAge);
     });
 
-  const ranges = Array(10_000_0)
+  const ranges = Array(10_000_000)
     .fill("")
     .map(() => {
       return [
@@ -65,7 +75,7 @@ function generateData() {
 }
 
 
-const runs = 10;
+const runs = 1;
 let range_counted;
 for (let i = 0; i < runs; i++) {
   const { ages, ranges } = generateData();
