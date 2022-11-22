@@ -4,7 +4,7 @@
  * What is the idea?
  *  - Transfer ages array to age JSON object with key is age value and the value is how many times this age exist in array
  *  - Go through ranges array => calculate sum of age from range[start] -> range[end]
- * 
+ *  - My result (base on my PC hardware - Chrome): 1227 - 1250
  * @JUST_AN_IDEA
  * I putted a Map() as a cache to save calculated range, if we have any range like that, just get it from cache and put into the array but I can't find out why it alaways take more time then normal way (no cache)?
  */
