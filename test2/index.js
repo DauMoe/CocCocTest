@@ -1,7 +1,7 @@
 /**
- * @WHAT_THE_HECK_HAPPEN_BELOW
- * The complexity still O(m*n) :< I can't find out a way reduce to O(n)
- * But in the most case, execute time reduce 15 times 
+ * @WHAT_HAPPEN_BELOW
+ * The complexity still O(m*n) :< I can't find out a way reduce
+ * But in the most case, execute time reduce about 15 times 
  * What is the idea?
  *  - Sort ages Array
  *  - Transfer ages array to age JSON object with key is age value and the value is how many times this age exist in array
@@ -12,7 +12,7 @@ let total = 0;
 const MaxAge = 200;
 
 console.clear();
-console.log("running...");
+
 function rangeCount(ages, ranges) {
   ages = ages.sort((a, b) => a-b);
   const agesObject = {};
@@ -33,6 +33,7 @@ function rangeCount(ages, ranges) {
   }
   return x;
   
+  //Original
   return ranges.map(range =>
     ages.reduce((people, age) =>
       people + ((age >= range[0] && age<=range[1] && 1) || 0)
@@ -75,7 +76,7 @@ function generateData() {
 }
 
 
-const runs = 1;
+const runs = 10;
 let range_counted;
 for (let i = 0; i < runs; i++) {
   const { ages, ranges } = generateData();
